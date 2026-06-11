@@ -1,0 +1,28 @@
+.DS_Store
+.AppleDouble
+.LSOverride
+.idea
+.ipynb_checkpoints
+__pycache__/
+
+# Astro / Node
+dist/
+.astro/
+node_modules/
+*.log
+npm-debug.log*
+
+# Env
+.env
+.env.production
+.env.local
+
+# Backup
+.jekyll-backup/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
+

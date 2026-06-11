@@ -1,0 +1,175 @@
+---
+import { site } from '~/data/site';
+const { pathname } = Astro.url;
+const isActive = (href: string) =>
+  href === '/' ? pathname === '/' : !href.includes('#') && pathname.startsWith(href);
+---
+
+<!-- Desktop top bar (hidden on mobile) -->
+<header class="hidden md:block fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-[rgba(7,7,11,0.55)] border-b border-[var(--color-border)]">
+  <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="/" class="font-[var(--font-display)] font-semibold tracking-tight text-lg">
+      <span class="text-gradient">aiman.</span>
+    </a>
+
+    <ul class="flex items-center gap-1 text-sm">
+      {site.nav.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class={`px-3 py-2 rounded-full transition-colors ${
+              isActive(item.href)
+                ? 'text-white bg-white/5'
+                : 'text-[var(--color-muted)] hover:text-white hover:bg-white/5'
+            }`}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <a href={site.social.email} class="btn text-xs">Contact →</a>
+  </nav>
+</header>
+
+<!-- Mobile floating action button -->
+<button
+  id="fab-toggle"
+  type="button"
+  aria-label="Open menu"
+  aria-expanded="false"
+  aria-controls="fab-menu"
+  class="md:hidden fixed bottom-6 right-6 z-[55] w-14 h-14 rounded-full flex items-center justify-center text-[#0b0b12] shadow-lg active:scale-95 transition-transform"
+  style="background: linear-gradient(135deg, #7c5cff, #22d3ee); box-shadow: 0 10px 30px -8px rgba(124, 92, 255, 0.6);"
+>
+  <svg id="fab-icon-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+    <line x1="4" y1="7" x2="20" y2="7"/>
+    <line x1="4" y1="12" x2="20" y2="12"/>
+    <line x1="4" y1="17" x2="20" y2="17"/>
+  </svg>
+  <svg id="fab-icon-close" class="hidden" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+    <line x1="6" y1="6" x2="18" y2="18"/>
+    <line x1="18" y1="6" x2="6" y2="18"/>
+  </svg>
+</button>
+
+<!-- Mobile fullscreen overlay menu -->
+<div
+  id="fab-menu"
+  class="md:hidden fixed inset-0 z-[54] hidden opacity-0 transition-opacity duration-300"
+  style="background: radial-gradient(800px 600px at 80% 20%, rgba(124, 92, 255, 0.25), transparent 60%), radial-gradient(700px 500px at 10% 80%, rgba(34, 211, 238, 0.15), transparent 60%), rgba(7, 7, 11, 0.96); backdrop-filter: blur(12px);"
+  role="dialog"
+  aria-modal="true"
+>
+  <div class="h-full flex flex-col px-8 pt-20 pb-28">
+    <a href="/" class="font-[var(--font-display)] font-semibold tracking-tight text-2xl mb-12">
+      <span class="text-gradient">aiman.</span>
+    </a>
+    <ul class="flex flex-col gap-1 text-3xl font-[var(--font-display)] font-semibold flex-1">
+      {site.nav.map((item, i) => (
+        <li
+          class="fab-menu-item opacity-0 translate-y-3"
+          style={`transition: all 0.4s ${0.05 + i * 0.05}s cubic-bezier(0.22, 1, 0.36, 1);`}
+        >
+          <a
+            href={item.href}
+            class={`block py-3 transition-colors ${
+              isActive(item.href) ? 'text-white' : 'text-[var(--color-muted)] hover:text-white'
+            }`}
+          >
+            <span class="opacity-50 text-sm font-mono mr-3">0{i + 1}</span>
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+    <div class="flex flex-wrap gap-3 mt-8">
+      <a href={site.social.github} target="_blank" rel="noopener" class="btn text-sm">GitHub</a>
+      <a href={site.social.linkedin} target="_blank" rel="noopener" class="btn text-sm">LinkedIn</a>
+      <a href={site.social.email} class="btn btn-primary text-sm">Email</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Live lookups (the DOM is replaced on every Astro view transition).
+  const $btn = () => document.getElementById('fab-toggle');
+  const $menu = () => document.getElementById('fab-menu');
+  const $iconOpen = () => document.getElementById('fab-icon-open');
+  const $iconClose = () => document.getElementById('fab-icon-close');
+
+  function setOpen(open: boolean) {
+    const btn = $btn(), menu = $menu(), iconOpen = $iconOpen(), iconClose = $iconClose();
+    if (!btn || !menu || !iconOpen || !iconClose) return;
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    iconOpen.classList.toggle('hidden', open);
+    iconClose.classList.toggle('hidden', !open);
+
+    if (open) {
+      menu.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      requestAnimationFrame(() => {
+        menu.style.opacity = '1';
+        menu.querySelectorAll<HTMLElement>('.fab-menu-item').forEach((el) => {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        });
+      });
+    } else {
+      menu.style.opacity = '0';
+      document.body.style.overflow = '';
+      menu.querySelectorAll<HTMLElement>('.fab-menu-item').forEach((el) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(12px)';
+      });
+      setTimeout(() => menu.classList.add('hidden'), 300);
+    }
+  }
+
+  // Document-level delegation: survives every ClientRouter DOM swap because
+  // it's bound to `document`, which is never replaced. Astro dedupes module
+  // scripts, so this block runs exactly once per page lifetime.
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement | null;
+    if (!target) return;
+
+    // Toggle button (or any descendant of it like the SVG icons).
+    if (target.closest('#fab-toggle')) {
+      const btn = $btn();
+      if (!btn) return;
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      setOpen(!open);
+      return;
+    }
+
+    // Any link inside the open menu closes it.
+    const link = target.closest('#fab-menu a');
+    if (link) setOpen(false);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && $btn()?.getAttribute('aria-expanded') === 'true') setOpen(false);
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768 && $btn()?.getAttribute('aria-expanded') === 'true') setOpen(false);
+  });
+
+  // After every Astro page transition, ensure the menu starts closed and the
+  // body scroll lock is released (in case it was open during navigation).
+  document.addEventListener('astro:after-swap', () => {
+    document.body.style.overflow = '';
+    const menu = $menu();
+    if (menu) {
+      menu.classList.add('hidden');
+      menu.style.opacity = '0';
+    }
+    const btn = $btn();
+    btn?.setAttribute('aria-expanded', 'false');
+    btn?.setAttribute('aria-label', 'Open menu');
+    $iconOpen()?.classList.remove('hidden');
+    $iconClose()?.classList.add('hidden');
+  });
+</script>

@@ -1,0 +1,88 @@
+---
+import Base from '~/layouts/Base.astro';
+import Reveal from '~/components/Reveal';
+import CvSubNav from '~/components/CvSubNav.astro';
+import { societies, interests, type Interest } from '~/data/cv';
+
+const categoryOrder: Interest['category'][] = ['Tech', 'Creative', 'Knowledge', 'Lifestyle'];
+const grouped = categoryOrder
+  .map((cat) => ({ cat, items: interests.filter((i) => i.category === cat) }))
+  .filter((g) => g.items.length > 0);
+---
+
+<Base title="Societies & Interests">
+  <section class="max-w-4xl mx-auto px-6 py-24">
+    <Reveal client:load>
+      <p class="text-xs uppercase tracking-[0.3em] text-white/60 mb-3">CV · Societies & Interests</p>
+      <h1 class="font-[var(--font-display)] text-4xl md:text-5xl font-semibold">🌐 Societies & Interests</h1>
+    </Reveal>
+
+    <div class="mt-12">
+      <CvSubNav />
+    </div>
+
+    <!-- MEMBERSHIPS -->
+    <div class="mb-16">
+      <Reveal client:load>
+        <h2 class="font-[var(--font-display)] text-2xl font-semibold mb-6">Memberships</h2>
+      </Reveal>
+      <div class="grid sm:grid-cols-2 gap-4">
+        {societies.map((s, i) => {
+          const Wrapper = s.url ? 'a' : 'div';
+          const wrapperProps = s.url
+            ? { href: s.url, target: '_blank', rel: 'noopener', class: 'card p-5 flex items-center gap-4 hover:border-[var(--color-accent)]' }
+            : { class: 'card p-5 flex items-center gap-4' };
+          return (
+            <Reveal client:load delay={i * 0.06}>
+              <Wrapper {...wrapperProps}>
+                {s.logo ? (
+                  <div class="w-14 h-14 shrink-0 rounded-lg bg-white/5 border border-[var(--color-border)] p-2 flex items-center justify-center overflow-hidden">
+                    <img
+                      src={s.logo}
+                      alt={`${s.org} logo`}
+                      class="max-w-full max-h-full object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+                ) : (
+                  <div class="text-2xl shrink-0">🏛️</div>
+                )}
+                <div class="min-w-0">
+                  <p class="text-sm text-[var(--color-accent-2)] mb-0.5">{s.role}</p>
+                  <p class="font-semibold text-white truncate">{s.org}</p>
+                  {s.url && (
+                    <p class="text-xs text-[var(--color-muted)] truncate">{new URL(s.url).hostname.replace(/^www\./, '')} ↗</p>
+                  )}
+                </div>
+              </Wrapper>
+            </Reveal>
+          );
+        })}
+      </div>
+    </div>
+
+    <!-- INTERESTS -->
+    <div>
+      <Reveal client:load>
+        <h2 class="font-[var(--font-display)] text-2xl font-semibold mb-6">Interests</h2>
+      </Reveal>
+      <div class="space-y-5">
+        {grouped.map((g, gi) => (
+          <Reveal client:load delay={0.05 + gi * 0.05}>
+            <div class="card p-5">
+              <p class="text-xs uppercase tracking-[0.2em] text-[var(--color-muted)] mb-4">{g.cat}</p>
+              <div class="flex flex-wrap gap-2.5">
+                {g.items.map((it) => (
+                  <div class="group flex items-center gap-2 px-3 py-2 rounded-xl bg-white/[0.04] border border-[var(--color-border)] hover:border-[var(--color-accent)] hover:bg-white/[0.07] transition-all">
+                    <span class="text-base leading-none" aria-hidden="true">{it.emoji}</span>
+                    <span class="text-sm text-white/90 group-hover:text-white">{it.name}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

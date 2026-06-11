@@ -1,0 +1,14 @@
+{
+  "items": [
+    { "name": "AI", "emoji": "🤖", "category": "Tech" },
+    { "name": "LLMs", "emoji": "💬", "category": "Tech" },
+    { "name": "Computer Vision", "emoji": "👁️", "category": "Tech" },
+    { "name": "Design", "emoji": "🎨", "category": "Creative" },
+    { "name": "Marketing", "emoji": "📣", "category": "Creative" },
+    { "name": "Economics", "emoji": "📈", "category": "Knowledge" },
+    { "name": "Arabic Literature", "emoji": "📖", "category": "Knowledge" },
+    { "name": "Chess", "emoji": "♟️", "category": "Lifestyle" },
+    { "name": "Gym", "emoji": "🏋️", "category": "Lifestyle" },
+    { "name": "Volunteering", "emoji": "🤝", "category": "Lifestyle" }
+  ]
+}

@@ -1,0 +1,172 @@
+backend:
+  name: github
+  repo: aimanalhazmi/aimanalhazmi.github.io
+  branch: main
+  base_url: https://me.aimanyalhazmi.workers.dev
+  auth_endpoint: api/auth
+
+publish_mode: simple
+media_folder: "public/img/uploads"
+public_folder: "/img/uploads"
+site_url: https://aimanalhazmi.github.io
+display_url: https://aimanalhazmi.github.io
+logo_url: /img/aiman.jpg
+
+collections:
+  - name: blog
+    label: Blog Posts
+    folder: src/content/blog
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: md
+    format: frontmatter
+    summary: "{{title}} — {{date | date('YYYY-MM-DD')}}"
+    sortable_fields: [date, title]
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Date, name: date, widget: datetime, format: "YYYY-MM-DD", time_format: false }
+      - { label: Description, name: description, widget: text, required: false }
+      - label: Tags
+        name: tags
+        widget: list
+        required: false
+        default: []
+      - label: Categories
+        name: categories
+        widget: list
+        required: false
+        default: []
+      - { label: Cover Image, name: cover, widget: image, required: false }
+      - { label: Draft, name: draft, widget: boolean, default: false, required: false }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: projects
+    label: Projects
+    folder: src/content/projects
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    summary: "{{title}}"
+    sortable_fields: [order, title]
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Description, name: description, widget: text }
+      - { label: Repo URL, name: repo, widget: string, required: false }
+      - { label: Demo URL, name: demo, widget: string, required: false }
+      - { label: Cover Image, name: cover, widget: image, required: false }
+      - label: Tags
+        name: tags
+        widget: list
+        required: false
+        default: []
+      - { label: Featured, name: featured, widget: boolean, default: false, required: false }
+      - { label: Order, name: order, widget: number, default: 0, required: false, value_type: int }
+      - { label: Started, name: started, widget: datetime, format: "YYYY-MM-DD", time_format: false, required: false, hint: "Real start date — overrides GitHub created_at for sort order" }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: cv
+    label: CV
+    files:
+      - label: Profile
+        name: profile
+        file: src/data/profile.json
+        fields:
+          - { label: Name, name: name, widget: string }
+          - { label: Tagline, name: tagline, widget: string }
+          - { label: Location, name: location, widget: string }
+          - { label: Email, name: email, widget: string }
+          - { label: Description, name: description, widget: text }
+          - label: Social
+            name: social
+            widget: object
+            fields:
+              - { label: GitHub, name: github, widget: string, required: false }
+              - { label: LinkedIn, name: linkedin, widget: string, required: false }
+              - { label: "Email (mailto:)", name: email, widget: string, required: false }
+
+      - label: Experience
+        name: experience
+        file: src/data/experience.json
+        fields:
+          - label: Entries
+            name: entries
+            widget: list
+            label_singular: Entry
+            summary: "{{fields.role}} — {{fields.org}}"
+            fields:
+              - { label: Role, name: role, widget: string }
+              - { label: Organization, name: org, widget: string }
+              - { label: Period, name: period, widget: string, hint: "e.g. Sep 2022 – Present" }
+              - label: Bullets
+                name: bullets
+                widget: list
+                field: { label: Bullet, name: bullet, widget: string }
+
+      - label: Education
+        name: education
+        file: src/data/education.json
+        fields:
+          - label: Entries
+            name: entries
+            widget: list
+            label_singular: Entry
+            summary: "{{fields.school}} — {{fields.degree}}"
+            fields:
+              - { label: School, name: school, widget: string }
+              - { label: Degree, name: degree, widget: string }
+              - { label: Period, name: period, widget: string }
+              - { label: Detail, name: detail, widget: text }
+
+      - label: Skills
+        name: skills
+        file: src/data/skills.json
+        fields:
+          - label: Groups
+            name: groups
+            widget: list
+            label_singular: Group
+            summary: "{{fields.group}}"
+            fields:
+              - { label: Group Name, name: group, widget: string }
+              - label: Items
+                name: items
+                widget: list
+                label_singular: Skill
+                summary: "{{fields.name}}"
+                fields:
+                  - { label: Name, name: name, widget: string }
+                  - { label: Icon (simple-icons slug), name: icon, widget: string, required: false }
+                  - { label: Emoji, name: emoji, widget: string, required: false }
+
+      - label: Societies
+        name: societies
+        file: src/data/societies.json
+        fields:
+          - label: Memberships
+            name: memberships
+            widget: list
+            label_singular: Membership
+            summary: "{{fields.role}} — {{fields.org}}"
+            fields:
+              - { label: Role, name: role, widget: string }
+              - { label: Organization, name: org, widget: string }
+              - { label: URL, name: url, widget: string, required: false }
+              - { label: Logo, name: logo, widget: image, required: false }
+
+      - label: Interests
+        name: interests
+        file: src/data/interests.json
+        fields:
+          - label: Items
+            name: items
+            widget: list
+            label_singular: Interest
+            summary: "{{fields.name}} ({{fields.category}})"
+            fields:
+              - { label: Name, name: name, widget: string }
+              - { label: Emoji, name: emoji, widget: string }
+              - label: Category
+                name: category
+                widget: select
+                options: [Tech, Creative, Knowledge, Lifestyle]

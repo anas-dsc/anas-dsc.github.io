@@ -1,0 +1,132 @@
+---
+import Base from '~/layouts/Base.astro';
+import Greeting from '~/components/Greeting';
+import Reveal from '~/components/Reveal';
+import ScrollSection from '~/components/ScrollSection';
+import { getCollection } from 'astro:content';
+import { site } from '~/data/site';
+import { getFeaturedProjects } from '~/lib/projects';
+
+const projects = await getFeaturedProjects();
+
+const posts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+---
+
+<Base>
+  <!-- HERO -->
+  <section class="relative min-h-[92vh] flex items-center">
+    <div class="relative z-10 max-w-6xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <Reveal client:load>
+          <p class="text-sm uppercase tracking-[0.3em] text-[var(--color-muted)] mb-4">
+            <Greeting client:load />
+          </p>
+        </Reveal>
+        <Reveal client:load delay={0.1}>
+          <h1 class="font-[var(--font-display)] text-5xl md:text-7xl font-semibold leading-[1.05] tracking-tight">
+            <span class="text-gradient">Aiman</span><br />Al-Hazmi.
+          </h1>
+        </Reveal>
+        <Reveal client:load delay={0.2}>
+          <p class="mt-6 text-lg text-white/90 max-w-xl drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+            {site.tagline}.
+          </p>
+        </Reveal>
+      </div>
+    </div>
+
+    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 text-xs text-[var(--color-muted)] tracking-widest uppercase animate-pulse">
+      ↓ scroll
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <ScrollSection client:load className="max-w-5xl mx-auto px-6 py-24 scroll-mt-20 block">
+    <div id="about" class="glass p-8 md:p-12">
+      <p class="text-xs uppercase tracking-[0.3em] text-[var(--color-muted)] mb-3">About</p>
+      <h2 class="font-[var(--font-display)] text-3xl md:text-4xl font-semibold">A little about me.</h2>
+
+      <div class="mt-10 grid md:grid-cols-[180px_1fr] gap-8 items-start">
+        <img
+          src="/img/aiman.jpg"
+          alt="Aiman Al-Hazmi"
+          class="w-40 h-40 md:w-44 md:h-44 rounded-full object-cover glow"
+        />
+        <div class="text-lg leading-relaxed text-[color:var(--color-fg)]/90 space-y-5">
+          <p>
+            I'm a Computer Science student focusing on <strong>Data Science and Engineering</strong>, with experience in software development and machine learning. I'm particularly passionate about <strong>AI</strong>, <strong>Machine Learning</strong>, <strong>Deep Learning</strong>, and <strong>Computer Vision</strong>, and I enjoy applying data-driven solutions to real-world problems.
+          </p>
+          <p>
+            Outside of academics and tech, I'm also actively involved in community volunteering.
+          </p>
+          <div class="flex flex-wrap items-center gap-3 pt-2 text-sm">
+            <a href={site.social.github} target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/15 hover:border-white/40 transition-all">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.63 22.42c.58.1.79-.25.79-.56v-2.04c-3.2.7-3.88-1.36-3.88-1.36-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.76 2.69 1.25 3.35.96.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.78 0c2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.26 5.69.41.36.78 1.06.78 2.13v3.16c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
+              GitHub
+            </a>
+            <a href={site.social.linkedin} target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/15 hover:border-white/40 transition-all">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.36-1.85c3.59 0 4.26 2.36 4.26 5.43v6.31ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12Zm1.78 13.02H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.99 0 1.78-.77 1.78-1.72V1.72C24 .77 23.21 0 22.22 0Z"/></svg>
+              LinkedIn
+            </a>
+          </div>
+          <div class="flex flex-wrap gap-3 pt-2">
+            <a href="/projects/" class="btn btn-primary">See projects</a>
+            <a href="/cv/" class="btn">Read CV</a>
+            <a href={site.social.email} class="btn">Get in touch</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ScrollSection>
+
+  <!-- FEATURED PROJECTS -->
+  <ScrollSection client:load className="max-w-6xl mx-auto px-6 py-24 block">
+    <div class="flex items-end justify-between mb-10">
+      <div>
+        <p class="text-xs uppercase tracking-[0.3em] text-[var(--color-muted)] mb-2">Selected work</p>
+        <h2 class="font-[var(--font-display)] text-3xl md:text-4xl font-semibold">Featured projects</h2>
+      </div>
+      <a href="/projects/" class="btn text-sm">All projects →</a>
+    </div>
+    <div class="grid md:grid-cols-3 gap-5">
+      {projects.map((p) => (
+        <a href={`/projects/${p.slug}/`} class="card block p-6 h-full">
+          <h3 class="font-[var(--font-display)] text-xl font-semibold mb-2">{p.title}</h3>
+          <p class="text-sm text-[var(--color-muted)] mb-4">{p.description}</p>
+          <div class="flex flex-wrap gap-2">
+            {p.tags.slice(0, 4).map((t: string) => <span class="tag">{t}</span>)}
+          </div>
+        </a>
+      ))}
+    </div>
+  </ScrollSection>
+
+  <!-- LATEST WRITING -->
+  {posts.length > 0 && (
+    <ScrollSection client:load className="max-w-6xl mx-auto px-6 py-12 block">
+      <div class="flex items-end justify-between mb-10">
+        <div>
+          <p class="text-xs uppercase tracking-[0.3em] text-[var(--color-muted)] mb-2">Writing</p>
+          <h2 class="font-[var(--font-display)] text-3xl md:text-4xl font-semibold">Latest from the blog</h2>
+        </div>
+        <a href="/blog/" class="btn text-sm">All posts →</a>
+      </div>
+      <div class="grid md:grid-cols-3 gap-5">
+        {posts.map((post) => (
+          <a href={`/blog/${post.id}/`} class="card block p-6 h-full">
+            <p class="text-xs text-[var(--color-muted)] mb-3">
+              {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+            </p>
+            <h3 class="font-[var(--font-display)] text-lg font-semibold mb-2">{post.data.title}</h3>
+            {post.data.description && (
+              <p class="text-sm text-[var(--color-muted)]">{post.data.description}</p>
+            )}
+          </a>
+        ))}
+      </div>
+    </ScrollSection>
+  )}
+</Base>

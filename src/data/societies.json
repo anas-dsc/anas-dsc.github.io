@@ -1,0 +1,16 @@
+{
+  "memberships": [
+    {
+      "role": "Board Member",
+      "org": "VJSD e.V.",
+      "url": "https://vjsd.org/",
+      "logo": "/img/societies/vjsd.png"
+    },
+    {
+      "role": "Member",
+      "org": "DJIV e.V.",
+      "url": "https://djiv.de/",
+      "logo": "/img/societies/djiv.png"
+    }
+  ]
+}

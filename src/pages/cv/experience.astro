@@ -1,0 +1,31 @@
+---
+import Base from '~/layouts/Base.astro';
+import Reveal from '~/components/Reveal';
+import CvSubNav from '~/components/CvSubNav.astro';
+import Timeline from '~/components/Timeline.astro';
+import { experience } from '~/data/cv';
+
+const items = experience.map((e) => ({
+  period: e.period,
+  title: e.role,
+  subtitle: e.org,
+  bullets: e.bullets,
+}));
+---
+
+<Base title="Experience">
+  <section class="max-w-4xl mx-auto px-6 py-24">
+    <Reveal client:load>
+      <p class="text-xs uppercase tracking-[0.3em] text-white/60 mb-3">CV · Experience</p>
+      <h1 class="font-[var(--font-display)] text-4xl md:text-5xl font-semibold">💼 Experience</h1>
+    </Reveal>
+
+    <div class="mt-12">
+      <CvSubNav />
+    </div>
+
+    <Reveal client:load delay={0.05}>
+      <Timeline items={items} />
+    </Reveal>
+  </section>
+</Base>

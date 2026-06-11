@@ -1,0 +1,31 @@
+{
+  "entries": [
+    {
+      "role": "Software & Data Engineering (Working Student)",
+      "org": "Computacenter AG & Co. oHG",
+      "period": "Sep 2022 – Present",
+      "bullets": [
+        "Developing and optimizing backend features",
+        "Integrating and processing data from various sources",
+        "Analyzing data to support decision-making processes"
+      ]
+    },
+    {
+      "role": "Volunteer IT Administrator",
+      "org": "Association of Yemeni Students in Germany (VJSD)",
+      "period": "Jun 2023 – May 2025",
+      "bullets": [
+        "Automated internal workflows",
+        "Developed and maintained the association's website"
+      ]
+    },
+    {
+      "role": "IT Administrator",
+      "org": "Franz & Wach Personalservice GmbH",
+      "period": "Jun 2022 – Sep 2022",
+      "bullets": [
+        "Managed IP telephony (CloudPBX) and first-level technical support."
+      ]
+    }
+  ]
+}

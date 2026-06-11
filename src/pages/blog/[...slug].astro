@@ -1,0 +1,33 @@
+---
+import Base from '~/layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((p) => ({ params: { slug: p.id }, props: { post: p } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Base title={post.data.title} description={post.data.description}>
+  <article class="max-w-3xl mx-auto px-6 py-24">
+    <a href="/blog/" class="text-sm text-[var(--color-muted)] hover:text-white">← All posts</a>
+    <p class="mt-8 text-xs text-[var(--color-muted)] tracking-widest uppercase">
+      {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+    </p>
+    <h1 class="font-[var(--font-display)] text-3xl md:text-5xl font-semibold mt-2 leading-tight">{post.data.title}</h1>
+    {post.data.description && (
+      <p class="mt-5 text-lg text-[color:var(--color-muted)]">{post.data.description}</p>
+    )}
+    <div class="flex flex-wrap gap-2 mt-5">
+      {post.data.tags.map((t) => <span class="tag">{t}</span>)}
+    </div>
+    <div class="prose prose-invert prose-aiman mt-12 max-w-none">
+      <Content />
+    </div>
+  </article>
+</Base>

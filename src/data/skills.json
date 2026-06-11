@@ -1,0 +1,75 @@
+{
+  "groups": [
+    {
+      "group": "AI / Machine Learning",
+      "items": [
+        { "name": "PyTorch", "icon": "pytorch" },
+        { "name": "TensorFlow", "icon": "tensorflow" },
+        { "name": "Hugging Face", "icon": "huggingface" },
+        { "name": "Neural Networks" }
+      ]
+    },
+    {
+      "group": "Generative AI & LLMs",
+      "items": [
+        { "name": "LangChain", "icon": "langchain" },
+        { "name": "RAG" },
+        { "name": "Fine-Tuning (LoRA / QLoRA)" },
+        { "name": "MCP" },
+        { "name": "Ollama", "icon": "ollama" },
+        { "name": "LM Studio" },
+        { "name": "Llama.cpp" }
+      ]
+    },
+    {
+      "group": "Programming Languages",
+      "items": [
+        { "name": "Python", "icon": "python" },
+        { "name": "SQL" },
+        { "name": "Java" },
+        { "name": "JavaScript", "icon": "javascript" },
+        { "name": "R", "icon": "r" },
+        { "name": "C", "icon": "c" },
+        { "name": "PHP", "icon": "php" },
+        { "name": "Haskell", "icon": "haskell" }
+      ]
+    },
+    {
+      "group": "Data Science & Engineering",
+      "items": [
+        { "name": "Data Science Lifecycle" },
+        { "name": "Statistical Analysis" },
+        { "name": "Model Training & Evaluation" },
+        { "name": "Data Preprocessing" },
+        { "name": "Data Integration" }
+      ]
+    },
+    {
+      "group": "Backend & APIs",
+      "items": [
+        { "name": "FastAPI", "icon": "fastapi" },
+        { "name": "Flask", "icon": "flask" },
+        { "name": "Streamlit", "icon": "streamlit" },
+        { "name": "Spring Boot", "icon": "springboot" }
+      ]
+    },
+    {
+      "group": "DevOps & Tools",
+      "items": [
+        { "name": "Docker", "icon": "docker" },
+        { "name": "Linux", "icon": "linux" },
+        { "name": "GitHub", "icon": "github" },
+        { "name": "GitLab", "icon": "gitlab" },
+        { "name": "Jira", "icon": "jira" }
+      ]
+    },
+    {
+      "group": "Languages",
+      "items": [
+        { "name": "Arabic (Native)", "emoji": "🇾🇪" },
+        { "name": "German (Fluent)", "emoji": "🇩🇪" },
+        { "name": "English (Advanced)", "emoji": "🇬🇧" }
+      ]
+    }
+  ]
+}

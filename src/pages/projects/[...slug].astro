@@ -1,0 +1,128 @@
+---
+import Base from '~/layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+import { fetchPortfolioRepos, type GitHubProject } from '~/lib/github';
+
+export const prerender = true;
+
+const normalizeUrl = (u?: string | null) =>
+  u ? u.toLowerCase().replace(/\/$/, '') : '';
+
+export async function getStaticPaths() {
+  const curated = await getCollection('projects');
+  const portfolioRepos = await fetchPortfolioRepos('aimanalhazmi');
+
+  const repoByUrl = new Map<string, GitHubProject>();
+  for (const r of portfolioRepos) repoByUrl.set(r.repoUrl.toLowerCase().replace(/\/$/, ''), r);
+
+  const usedAutoUrls = new Set<string>();
+
+  const curatedPaths = curated.map((p) => {
+    const url = (p.data.repo ?? '').toLowerCase().replace(/\/$/, '');
+    const match = url ? repoByUrl.get(url) : undefined;
+    if (match) usedAutoUrls.add(url);
+    return {
+      params: { slug: p.id },
+      props: { kind: 'curated' as const, project: p, meta: match ?? null },
+    };
+  });
+
+  const autoPaths = portfolioRepos
+    .filter((r) => !usedAutoUrls.has(r.repoUrl.toLowerCase().replace(/\/$/, '')))
+    .map((r) => ({
+      params: { slug: r.slug },
+      props: { kind: 'auto' as const, repo: r },
+    }));
+
+  return [...curatedPaths, ...autoPaths];
+}
+
+type Props =
+  | {
+      kind: 'curated';
+      project: Awaited<ReturnType<typeof getCollection>>[number];
+      meta: GitHubProject | null;
+    }
+  | { kind: 'auto'; repo: GitHubProject };
+
+const props = Astro.props as Props;
+
+let title: string;
+let description: string;
+let tags: string[];
+let repoUrl: string | undefined;
+let demoUrl: string | undefined;
+let Content: Awaited<ReturnType<typeof render>>['Content'] | null = null;
+let meta: { language: string | null; stars: number; updatedAt: string; createdAt: string } | null = null;
+
+if (props.kind === 'curated') {
+  const p = props.project;
+  const m = props.meta;
+  title = p.data.title;
+  description = p.data.description;
+  const seen = new Map<string, string>();
+  for (const t of [...p.data.tags, ...(m?.tags ?? [])]) {
+    const key = t.toLowerCase();
+    if (!seen.has(key)) seen.set(key, t);
+  }
+  tags = Array.from(seen.values());
+  repoUrl = p.data.repo ?? m?.repoUrl;
+  demoUrl = p.data.demo ?? m?.homepage ?? undefined;
+  Content = (await render(p)).Content;
+  const startedIso = p.data.started ? p.data.started.toISOString() : m?.createdAt ?? '';
+  if (m || p.data.started) meta = {
+    language: m?.language ?? null,
+    stars: m?.stars ?? 0,
+    updatedAt: m?.updatedAt ?? '',
+    createdAt: startedIso,
+  };
+} else {
+  const r = props.repo;
+  title = r.title;
+  description = r.description;
+  tags = r.tags;
+  repoUrl = r.repoUrl;
+  demoUrl = r.homepage ?? undefined;
+  meta = { language: r.language, stars: r.stars, updatedAt: r.updatedAt, createdAt: r.createdAt };
+}
+
+const fmt = (iso: string) =>
+  new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+const updatedLabel = meta?.updatedAt ? fmt(meta.updatedAt) : null;
+const createdLabel = meta?.createdAt ? fmt(meta.createdAt) : null;
+---
+
+<Base title={title} description={description}>
+  <article class="max-w-3xl mx-auto px-6 py-24">
+    <a href="/projects/" class="text-sm text-[var(--color-muted)] hover:text-white">← All projects</a>
+    <h1 class="font-[var(--font-display)] text-4xl md:text-5xl font-semibold mt-6">{title}</h1>
+    <p class="mt-4 text-lg text-[color:var(--color-muted)]">{description}</p>
+    <div class="flex flex-wrap gap-2 mt-5">
+      {tags.map((t) => <span class="tag">{t}</span>)}
+    </div>
+    <div class="flex flex-wrap gap-3 mt-6">
+      {repoUrl && <a href={repoUrl} target="_blank" rel="noopener" class="btn btn-primary text-sm">View on GitHub →</a>}
+      {demoUrl && <a href={demoUrl} target="_blank" rel="noopener" class="btn text-sm">Live demo →</a>}
+    </div>
+    {meta && (
+      <div class="flex flex-wrap gap-x-5 gap-y-1 mt-6 text-sm text-[var(--color-muted)]">
+        {meta.language && <span>{meta.language}</span>}
+        {meta.stars > 0 && <span>★ {meta.stars}</span>}
+        {createdLabel && <span>Started {createdLabel}</span>}
+        {updatedLabel && <span>Updated {updatedLabel}</span>}
+      </div>
+    )}
+    {Content && (
+      <div class="prose prose-invert prose-aiman mt-12 max-w-none">
+        <Content />
+      </div>
+    )}
+    {!Content && (
+      <div class="prose prose-invert prose-aiman mt-12 max-w-none">
+        <p class="text-[color:var(--color-muted)]">
+          Full README and source available on GitHub.
+        </p>
+      </div>
+    )}
+  </article>
+</Base>

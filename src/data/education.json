@@ -1,0 +1,16 @@
+{
+  "entries": [
+    {
+      "school": "Technical University of Berlin",
+      "degree": "MSc Computer Science",
+      "period": "Oct 2024 – 2026",
+      "detail": "Focus: Data Science & Engineering."
+    },
+    {
+      "school": "Free University of Berlin",
+      "degree": "BSc Computer Science",
+      "period": "Oct 2020 – Sep 2024",
+      "detail": "Thesis: Brand Detection on Garments (Computer Vision)."
+    }
+  ]
+}
