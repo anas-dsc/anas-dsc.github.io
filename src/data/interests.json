@@ -1,14 +1,14 @@
 {
   "items": [
-    { "name": "AI", "emoji": "🤖", "category": "Tech" },
-    { "name": "LLMs", "emoji": "💬", "category": "Tech" },
-    { "name": "Computer Vision", "emoji": "👁️", "category": "Tech" },
-    { "name": "Design", "emoji": "🎨", "category": "Creative" },
+    { "name": "AI & Machine Learning", "emoji": "🤖", "category": "Tech" },
+    { "name": "Data Analytics", "emoji": "📊", "category": "Tech" },
+    { "name": "Big Data", "emoji": "💾", "category": "Tech" },
+    { "name": "Business Intelligence", "emoji": "📈", "category": "Tech" },
+    { "name": "Process Automation", "emoji": "⚙️", "category": "Tech" },
+    { "name": "Dashboard Design", "emoji": "🎨", "category": "Creative" },
     { "name": "Marketing", "emoji": "📣", "category": "Creative" },
-    { "name": "Economics", "emoji": "📈", "category": "Knowledge" },
-    { "name": "Arabic Literature", "emoji": "📖", "category": "Knowledge" },
-    { "name": "Chess", "emoji": "♟️", "category": "Lifestyle" },
-    { "name": "Gym", "emoji": "🏋️", "category": "Lifestyle" },
-    { "name": "Volunteering", "emoji": "🤝", "category": "Lifestyle" }
+    { "name": "Hackathons", "emoji": "🏆", "category": "Lifestyle" },
+    { "name": "Volunteering", "emoji": "🤝", "category": "Lifestyle" },
+    { "name": "Reading", "emoji": "📖", "category": "Lifestyle" }
   ]
 }
