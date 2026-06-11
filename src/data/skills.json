@@ -1,74 +1,62 @@
 {
   "groups": [
     {
-      "group": "AI / Machine Learning",
-      "items": [
-        { "name": "PyTorch", "icon": "pytorch" },
-        { "name": "TensorFlow", "icon": "tensorflow" },
-        { "name": "Hugging Face", "icon": "huggingface" },
-        { "name": "Neural Networks" }
-      ]
-    },
-    {
-      "group": "Generative AI & LLMs",
-      "items": [
-        { "name": "LangChain", "icon": "langchain" },
-        { "name": "RAG" },
-        { "name": "Fine-Tuning (LoRA / QLoRA)" },
-        { "name": "MCP" },
-        { "name": "Ollama", "icon": "ollama" },
-        { "name": "LM Studio" },
-        { "name": "Llama.cpp" }
-      ]
-    },
-    {
-      "group": "Programming Languages",
+      "group": "Data Engineering & Analytics",
       "items": [
         { "name": "Python", "icon": "python" },
-        { "name": "SQL" },
-        { "name": "Java" },
-        { "name": "JavaScript", "icon": "javascript" },
-        { "name": "R", "icon": "r" },
-        { "name": "C", "icon": "c" },
-        { "name": "PHP", "icon": "php" },
-        { "name": "Haskell", "icon": "haskell" }
-      ]
-    },
-    {
-      "group": "Data Science & Engineering",
-      "items": [
-        { "name": "Data Science Lifecycle" },
-        { "name": "Statistical Analysis" },
-        { "name": "Model Training & Evaluation" },
-        { "name": "Data Preprocessing" },
+        { "name": "SQL", "icon": "database" },
+        { "name": "ETL Development (SSIS)" },
+        { "name": "Data Warehousing" },
+        { "name": "Data Cleaning" },
         { "name": "Data Integration" }
       ]
     },
     {
-      "group": "Backend & APIs",
+      "group": "Business Intelligence",
       "items": [
-        { "name": "FastAPI", "icon": "fastapi" },
-        { "name": "Flask", "icon": "flask" },
-        { "name": "Streamlit", "icon": "streamlit" },
-        { "name": "Spring Boot", "icon": "springboot" }
+        { "name": "Power BI" },
+        { "name": "Tableau" },
+        { "name": "Metabase" },
+        { "name": "Data Visualization" },
+        { "name": "KPI Reporting" }
       ]
     },
     {
-      "group": "DevOps & Tools",
+      "group": "Machine Learning",
+      "items": [
+        { "name": "Scikit-learn" },
+        { "name": "Pandas" },
+        { "name": "Model Training & Evaluation" },
+        { "name": "Regression Analysis" },
+        { "name": "NLP / NER" }
+      ]
+    },
+    {
+      "group": "Backend & Development",
+      "items": [
+        { "name": "Flask", "icon": "flask" },
+        { "name": "React" },
+        { "name": "REST APIs" },
+        { "name": "JavaScript", "icon": "javascript" },
+        { "name": "R", "icon": "r" }
+      ]
+    },
+    {
+      "group": "DevOps & Cloud",
       "items": [
         { "name": "Docker", "icon": "docker" },
         { "name": "Linux", "icon": "linux" },
         { "name": "GitHub", "icon": "github" },
         { "name": "GitLab", "icon": "gitlab" },
-        { "name": "Jira", "icon": "jira" }
+        { "name": "AWS" }
       ]
     },
     {
       "group": "Languages",
       "items": [
         { "name": "Arabic (Native)", "emoji": "🇾🇪" },
-        { "name": "German (Fluent)", "emoji": "🇩🇪" },
-        { "name": "English (Advanced)", "emoji": "🇬🇧" }
+        { "name": "English (Advanced)", "emoji": "🇬🇧" },
+        { "name": "German (Beginner)", "emoji": "🇩🇪" }
       ]
     }
   ]
