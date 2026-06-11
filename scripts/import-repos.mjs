@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const PROJECTS_DIR = join(ROOT, 'src/content/projects');
-const USER = 'aimanalhazmi';
+const USER = 'anas-dsc';
 const PORTFOLIO_TOPIC = 'y-pub';
 const FEATURED_TOPIC = 'y-feat';
 
