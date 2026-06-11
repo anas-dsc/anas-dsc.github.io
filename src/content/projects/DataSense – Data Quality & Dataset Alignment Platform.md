@@ -1,7 +1,7 @@
 ---
 title: DataSense – Data Quality & Dataset Alignment Platform
 description: Full-stack system for automated data quality analysis, dataset comparison, and alignment. Includes data profiling, missing value detection, duplicate identification, schema matching, and interactive preview-before-apply workflow.
-repo: https://github.com/anas-dsc
+repo: https://github.com/anas-dsc/data-sense
 tags: [Python, React, Flask, Data Engineering, ETL]
 featured: true
 order: 1
