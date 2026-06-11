@@ -45,13 +45,18 @@
     "mcp": "MCP",
     "lora": "LoRA",
     "qlora": "QLoRA",
+    "bi": "BI",
+    "etl": "ETL",
+    "ssis": "SSIS",
     "deep-learning": "Deep Learning",
     "machine-learning": "Machine Learning",
     "reinforcement-learning": "Reinforcement Learning",
     "computer-vision": "Computer Vision",
     "data-science": "Data Science",
     "data-engineering": "Data Engineering",
+    "data-warehousing": "Data Warehousing",
     "data-analysis": "Data Analysis",
+    "business-intelligence": "Business Intelligence",
     "natural-language-processing": "NLP",
     "fine-tuning": "Fine-Tuning",
     "finetuning": "Fine-Tuning",
@@ -138,9 +143,14 @@
     "mongodb": "MongoDB",
     "redis": "Redis",
     "sqlite": "SQLite",
+    "oracle": "Oracle",
     "github": "GitHub",
     "gitlab": "GitLab",
     "jira": "Jira",
+    "powerbi": "Power BI",
+    "power-bi": "Power BI",
+    "tableau": "Tableau",
+    "metabase": "Metabase",
     "healthcare": "Healthcare",
     "finance": "Finance",
     "fintech": "FinTech",
@@ -151,7 +161,7 @@
     "ECG", "NLP", "AI", "ML", "API", "CV", "UI", "UX", "LLM", "LLMS",
     "SQL", "HTTP", "REST", "AWS", "GCP", "IOS", "CLI", "SDK", "IDE",
     "CI", "CD", "GPU", "CPU", "RAG", "GAN", "CNN", "RNN", "LSTM",
-    "BERT", "GPT", "TTS", "STT", "OCR", "PHP", "MCP"
+    "BERT", "GPT", "TTS", "STT", "OCR", "PHP", "MCP", "BI", "ETL", "SSIS"
   ],
   "aliases": {
     "llms": "llm",
@@ -177,6 +187,8 @@
     "fine-tuning-llm": "fine-tuning-llms",
     "finetuning-llm": "fine-tuning-llms",
     "natural-language-processing": "nlp",
-    "machine-learning": "ml"
+    "machine-learning": "ml",
+    "powerbi": "power-bi",
+    "business-intelligence": "bi"
   }
 }
