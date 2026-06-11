@@ -1,12 +1,12 @@
 {
-  "name": "Aiman Al-Hazmi",
-  "tagline": "MSc Computer Science · AI & ML Engineer · Software Developer",
-  "location": "Berlin, Germany",
-  "email": "aimanalhazmi@gmail.com",
-  "description": "Master's student in Computer Science at TU Berlin focused on Data Science and Software Engineering. Currently working as a software developer with a strong interest in AI, Deep Learning, Computer Vision and Natural Language Processing.",
+  "name": "Anas Shabalah",
+  "tagline": "Data Engineer & BI Developer · Data Science Student",
+  "location": "Hafar Al-Batin, Saudi Arabia",
+  "email": "anasshabalah2@gmail.com",
+  "description": "Data Engineer and Data Analyst with hands-on experience in building ETL pipelines, data warehouses, and business intelligence dashboards. Passionate about transforming complex data into reliable, scalable, and actionable insights that support data-driven decision-making.",
   "social": {
-    "github": "https://github.com/aimanalhazmi",
-    "linkedin": "https://www.linkedin.com/in/aimanalhazmi",
-    "email": "mailto:aimanalhazmi@gmail.com"
+    "github": "https://github.com/anas-dsc",
+    "linkedin": "https://www.linkedin.com/in/anasshabalah",
+    "email": "mailto:anasshabalah2@gmail.com"
   }
 }
