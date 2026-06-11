@@ -1,16 +1,16 @@
 backend:
   name: github
-  repo: aimanalhazmi/aimanalhazmi.github.io
+  repo: anas-dsc/anas-dsc.github.io
   branch: main
-  base_url: https://me.aimanyalhazmi.workers.dev
+  base_url: #
   auth_endpoint: api/auth
 
 publish_mode: simple
 media_folder: "public/img/uploads"
 public_folder: "/img/uploads"
-site_url: https://aimanalhazmi.github.io
-display_url: https://aimanalhazmi.github.io
-logo_url: /img/aiman.jpg
+site_url: https://anas-dsc.github.io
+display_url: https://anas-dsc.github.io
+logo_url: /img/anas.jpg
 
 collections:
   - name: blog
