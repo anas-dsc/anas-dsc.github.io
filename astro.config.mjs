@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://aimanalhazmi.github.io',
+  site: 'https://anas-dsc.github.io',
 
   output: 'static',
 
