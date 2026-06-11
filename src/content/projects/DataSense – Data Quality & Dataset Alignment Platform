@@ -11,4 +11,3 @@ started: 2026-01-01
 Developed DataSense, a full-stack adaptive data quality and dataset alignment platform using **React**, **Flask**, **REST APIs**, and **Docker**. The system supports automated cleaning, comparison, and alignment workflows across multiple data sources.
 
 Includes data profiling, missing value detection, duplicate identification, schema matching, and an interactive preview-before-apply workflow for safe dataset synchronization.
-```
