@@ -1,30 +1,26 @@
 {
   "entries": [
     {
-      "role": "Software & Data Engineering (Working Student)",
-      "org": "Computacenter AG & Co. oHG",
-      "period": "Sep 2022 – Present",
+      "role": "Data Engineering & Analytics Intern",
+      "org": "NexuMind",
+      "period": "Jun 2025 – Present",
       "bullets": [
-        "Developing and optimizing backend features",
-        "Integrating and processing data from various sources",
-        "Analyzing data to support decision-making processes"
+        "Developed large-scale ETL pipelines for extracting and processing e-commerce product data from 20+ online retailers across Saudi Arabia",
+        "Worked on data ingestion, cleaning, standardization, clustering, and product matching workflows using Python, Pandas, PostgreSQL, and MySQL",
+        "Developed a machine learning-assisted identifier extraction model to automatically detect GTINs, MPNs, and product identifiers from unstructured text",
+        "Built analytical dashboards and reporting solutions using Metabase and Power BI to analyze user behavior and product performance"
       ]
     },
     {
-      "role": "Volunteer IT Administrator",
-      "org": "Association of Yemeni Students in Germany (VJSD)",
-      "period": "Jun 2023 – May 2025",
+      "role": "Data Engineer & BI Developer",
+      "org": "Data Management Office – University of Hafr Al-Batin",
+      "period": "Aug 2025 – Feb 2026",
       "bullets": [
-        "Automated internal workflows",
-        "Developed and maintained the association's website"
-      ]
-    },
-    {
-      "role": "IT Administrator",
-      "org": "Franz & Wach Personalservice GmbH",
-      "period": "Jun 2022 – Sep 2022",
-      "bullets": [
-        "Managed IP telephony (CloudPBX) and first-level technical support."
+        "Designed and contributed to the development of a centralized Data Warehouse integrating academic, administrative, staff, and student data",
+        "Built and maintained ETL pipelines using SSIS, SQL Server, and Python for data extraction, transformation, cleaning, and loading processes",
+        "Integrated and processed data from Oracle and SQL Server databases across multiple university deanships and departments",
+        "Developed interactive Power BI dashboards and KPI reports for university management using drill-down analysis and data visualization techniques",
+        "Collaborated with university stakeholders and supervisors to automate reporting workflows and deliver actionable insights"
       ]
     }
   ]
