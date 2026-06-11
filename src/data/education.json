@@ -1,16 +1,16 @@
 {
   "entries": [
     {
-      "school": "Technical University of Berlin",
-      "degree": "MSc Computer Science",
-      "period": "Oct 2024 – 2026",
-      "detail": "Focus: Data Science & Engineering."
+      "school": "University of Hafr Al-Batin",
+      "degree": "BSc Data Science",
+      "period": "Oct 2022 – Jun 2026",
+      "detail": "GPA: 3.991 / 4.00 (Excellent with First Class Honors). Focus areas: Data Science, Machine Learning, Data Engineering, Business Intelligence, Big Data Analytics."
     },
     {
-      "school": "Free University of Berlin",
-      "degree": "BSc Computer Science",
-      "period": "Oct 2020 – Sep 2024",
-      "detail": "Thesis: Brand Detection on Garments (Computer Vision)."
+      "school": "Aljazeera University",
+      "degree": "Bachelor of Pharmacy",
+      "period": "Sep 2020 – Sep 2022",
+      "detail": "Completed undergraduate studies in Pharmacy before transitioning to Data Science. Covered courses in Biology, Chemistry, Pharmacology, Laboratory Analysis, and Medical Sciences."
     }
   ]
 }
