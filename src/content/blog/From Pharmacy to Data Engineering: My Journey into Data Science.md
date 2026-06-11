@@ -2,7 +2,7 @@
 title: "From Pharmacy to Data Engineering: My Journey into Data Science"
 date: 2026-05-20
 description: "How my background in pharmacy led me to discover a passion for data engineering, building ETL pipelines, and creating actionable business intelligence."
-tags: [data-science, career, data-engineering, python]
+tags: [pharmacist, data-science, data-engineering]
 categories: [Career, Data Engineering]
 ---
 
