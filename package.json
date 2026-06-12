@@ -1,5 +1,5 @@
 {
-  "name": "aimanalhazmi.github.io",
+  "name": "anas-dsc.github.io",
   "type": "module",
   "version": "1.0.0",
   "private": true,
@@ -9,8 +9,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy:worker": "wrangler deploy",
-    "import:projects": "node scripts/import-repos.mjs"
+    "deploy:worker": "wrangler deploy"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.0.0",
