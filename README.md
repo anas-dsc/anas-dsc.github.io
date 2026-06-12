@@ -1,3 +1,3 @@
-# aimanalhazmi.github.io
+# anas-dsc.github.io
 
-Personal site of Aiman Al-Hazmi 
+Personal site of Anas Shabalah
