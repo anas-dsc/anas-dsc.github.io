@@ -56,7 +56,7 @@ export async function getAllProjects(githubUser = 'anas-dsc'): Promise<ProjectCa
       description: p.data.description,
       tags: unionTags(p.data.tags, match?.tags),
       source: 'curated',
-      featured: match?.featured ?? false,
+      featured: p.data.featured ?? match?.featured ?? false,,
       order: p.data.order ?? 0,
       createdAt: p.data.started
         ? p.data.started.toISOString()
