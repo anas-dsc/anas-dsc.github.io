@@ -10,7 +10,7 @@ const normalizeUrl = (u?: string | null) =>
 
 export async function getStaticPaths() {
   const curated = await getCollection('projects');
-  const portfolioRepos = await fetchPortfolioRepos('aimanalhazmi');
+  const portfolioRepos = await fetchPortfolioRepos('anas-dsc');
 
   const repoByUrl = new Map<string, GitHubProject>();
   for (const r of portfolioRepos) repoByUrl.set(r.repoUrl.toLowerCase().replace(/\/$/, ''), r);
