@@ -50,13 +50,19 @@ export async function getAllProjects(githubUser = 'anas-dsc'): Promise<ProjectCa
     const matchUrl = normalizeUrl(p.data.repo);
     const match = matchUrl ? repoByUrl.get(matchUrl) : undefined;
     if (match) usedAutoUrls.add(matchUrl);
+    
+    // تحديد حالة الـ featured بأمان تام
+    const isFeatured = p.data.featured !== undefined 
+      ? p.data.featured 
+      : (match?.featured ?? false);
+
     return {
       slug: p.id,
       title: p.data.title,
       description: p.data.description,
       tags: unionTags(p.data.tags, match?.tags),
       source: 'curated',
-      featured: p.data.featured ?? match?.featured ?? false,,
+      featured: isFeatured,
       order: p.data.order ?? 0,
       createdAt: p.data.started
         ? p.data.started.toISOString()
