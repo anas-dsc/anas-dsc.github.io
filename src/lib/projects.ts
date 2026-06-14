@@ -37,7 +37,7 @@ function sortProjects(items: ProjectCard[]): ProjectCard[] {
   return [...items].sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''));
 }
 
-export async function getAllProjects(githubUser = 'aimanalhazmi'): Promise<ProjectCard[]> {
+export async function getAllProjects(githubUser = 'anas-dsc'): Promise<ProjectCard[]> {
   const curatedEntries = await getCollection('projects');
   const portfolioRepos = await fetchPortfolioRepos(githubUser);
 
@@ -90,6 +90,6 @@ export async function getAllProjects(githubUser = 'aimanalhazmi'): Promise<Proje
   return sortProjects([...curated, ...autoOnly]);
 }
 
-export async function getFeaturedProjects(githubUser = 'aimanalhazmi'): Promise<ProjectCard[]> {
+export async function getFeaturedProjects(githubUser = 'anas-dsc'): Promise<ProjectCard[]> {
   return (await getAllProjects(githubUser)).filter((p) => p.featured);
 }
