@@ -1,13 +1,9 @@
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { useRef, type ReactNode } from 'react';
 
 /**
- * Wraps a section so it fades + scales in as it enters the viewport,
- * and fades + scales out as it leaves (scrolls past the top).
- *
- * Progress: 0 = section bottom hits viewport bottom (just entering)
- *           0.5 = section centered
- *           1 = section top has left the viewport top (gone)
+ * Wraps a section so it fades and slides up slightly as it enters the viewport.
+ * Much more reliable on mobile devices than scroll-linked animations.
  */
 export default function ScrollSection({
   children,
@@ -18,17 +14,7 @@ export default function ScrollSection({
 }) {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0, 1, 1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0.92, 1, 1, 0.94]);
-  const y = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [60, 0, 0, -40]);
-  const blur = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [6, 0, 0, 4]);
-  const filter = useTransform(blur, (b) => `blur(${b}px)`);
+  const isInView = useInView(ref, { once: true, margin: '-50px' });
 
   if (reduce) {
     return <section ref={ref} className={className}>{children}</section>;
@@ -38,7 +24,10 @@ export default function ScrollSection({
     <motion.section
       ref={ref}
       className={className}
-      style={{ opacity, scale, y, filter, willChange: 'transform, opacity, filter' }}
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      style={{ willChange: 'transform, opacity' }}
     >
       {children}
     </motion.section>
