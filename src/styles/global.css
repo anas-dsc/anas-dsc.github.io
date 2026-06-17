@@ -183,3 +183,85 @@ body {
   background: rgba(255, 255, 255, 0.03);
   color: var(--color-muted);
 }
+
+
+/* ------------------------------------------------------------------
+   CSS-only animated starfield + radial gradient.
+   Shown immediately on first paint (before the Three.js galaxy mounts)
+   and remains visible underneath the WebGL canvas. On mobile / slow
+   networks where the 800KB HeroScene bundle is still downloading, this
+   gives the page a "living" cosmic background instead of a flat black
+   square.
+   ------------------------------------------------------------------ */
+.galaxy-fallback {
+  background:
+    radial-gradient(1px 1px at 20% 30%, rgba(255, 255, 255, 0.9), transparent 50%),
+    radial-gradient(1px 1px at 40% 70%, rgba(255, 255, 255, 0.7), transparent 50%),
+    radial-gradient(1px 1px at 60% 20%, rgba(255, 235, 200, 0.8), transparent 50%),
+    radial-gradient(1px 1px at 80% 80%, rgba(255, 255, 255, 0.6), transparent 50%),
+    radial-gradient(1px 1px at 10% 90%, rgba(180, 200, 255, 0.7), transparent 50%),
+    radial-gradient(1px 1px at 90% 40%, rgba(255, 255, 255, 0.8), transparent 50%),
+    radial-gradient(1.5px 1.5px at 50% 50%, rgba(255, 220, 170, 0.9), transparent 50%),
+    radial-gradient(ellipse 1200px 700px at 80% -10%, rgba(124, 92, 255, 0.22), transparent 60%),
+    radial-gradient(ellipse 900px 500px at -10% 30%, rgba(34, 211, 238, 0.12), transparent 60%),
+    radial-gradient(ellipse at 50% 40%, #1a1633 0%, #0a0a18 45%, #02020a 100%);
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  background-size:
+    200px 200px, 250px 250px, 300px 300px, 220px 220px, 280px 280px, 260px 260px, 320px 320px,
+    100% 100%, 100% 100%, 100% 100%;
+  background-position:
+    0 0, 50px 80px, 120px 30px, 200px 150px, 30px 200px, 250px 90px, 180px 180px,
+    0 0, 0 0, 0 0;
+  animation: galaxy-twinkle 8s ease-in-out infinite alternate;
+}
+
+@keyframes galaxy-twinkle {
+  0% {
+    opacity: 0.85;
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 1;
+    filter: brightness(1.15);
+  }
+  100% {
+    opacity: 0.9;
+    filter: brightness(1.05);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .galaxy-fallback {
+    animation: none;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Scroll-triggered reveal (used by Reveal.tsx and ScrollSection.tsx).
+   We deliberately do NOT set opacity:0 on `.reveal` itself. Earlier
+   implementations baked `opacity:0` into the SSR output via framer-motion,
+   which made the hero text + About section + Projects + Blog invisible
+   on mobile until the 800KB Three.js bundle finished downloading. The
+   current implementation renders `.reveal.reveal--visible` (both
+   classes) directly, so content is fully visible by default.
+   ------------------------------------------------------------------ */
+.reveal {
+  animation: reveal-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0.4;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    animation: none;
+  }
+}
