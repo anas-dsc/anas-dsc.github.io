@@ -1,13 +1,25 @@
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
-import { useRef, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
 /**
- * Wraps a section so it fades + scales in as it enters the viewport,
- * and fades + scales out as it leaves (scrolls past the top).
+ * ScrollSection — previously wrapped its children in a framer-motion
+ * `motion.section` that faded + scaled + blurred the section in and out
+ * based on scroll progress. That implementation caused the About section
+ * (and Projects / Blog sections) to be invisible on mobile for two reasons:
  *
- * Progress: 0 = section bottom hits viewport bottom (just entering)
- *           0.5 = section centered
- *           1 = section top has left the viewport top (gone)
+ *   1. SSR: framer-motion baked `opacity:0; filter:blur(6px);
+ *      transform:translateY(60px) scale(0.92)` into the server-rendered
+ *      HTML. While the 800KB Three.js bundle (HeroScene) was still
+ *      downloading on a slow mobile network, the section was invisible.
+ *
+ *   2. Scroll math: on mobile, the About section is much taller than the
+ *      viewport (photo + 2 paragraphs + buttons stacked). The fade-out
+ *      phase (`opacity [0.75, 1] → [1, 0]`) kicked in while the user was
+ *      still reading the bottom of the section, making it disappear
+ *      mid-read.
+ *
+ * The fix is to drop the scroll-driven opacity entirely. The section is
+ * always visible. A subtle one-shot fade-in is still provided via the
+ * `reveal` CSS class so the section feels alive without ever disappearing.
  */
 export default function ScrollSection({
   children,
@@ -16,31 +28,9 @@ export default function ScrollSection({
   children: ReactNode;
   className?: string;
 }) {
-  const reduce = useReducedMotion();
-  const ref = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0, 1, 1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0.92, 1, 1, 0.94]);
-  const y = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [60, 0, 0, -40]);
-  const blur = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [6, 0, 0, 4]);
-  const filter = useTransform(blur, (b) => `blur(${b}px)`);
-
-  if (reduce) {
-    return <section ref={ref} className={className}>{children}</section>;
-  }
-
   return (
-    <motion.section
-      ref={ref}
-      className={className}
-      style={{ opacity, scale, y, filter, willChange: 'transform, opacity, filter' }}
-    >
+    <section className={`${className ?? ''} reveal reveal--visible`}>
       {children}
-    </motion.section>
+    </section>
   );
 }
